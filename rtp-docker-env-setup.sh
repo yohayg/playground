@@ -124,10 +124,11 @@ else
 fi
 
 if [[ ! -d $GIT_PATH/JenkinsScripts ]]; then
+    cd $GIT_PATH
     echo "Cloning JenkinsScripts to $GIT_PATH/JenkinsScripts"
     git clone git@gitlab.marketo.org:RTP/JenkinsScripts.git
     chmod +x JenkinsScripts/docker-dev/cloneRepos.sh
-    cd $GIT_PATH ; ./JenkinsScripts/docker-dev/cloneRepos.sh
+    ./JenkinsScripts/docker-dev/cloneRepos.sh
 else
     echo "JenkinsScripts already exists in $GIT_PATH/JenkinsScripts"
 fi
