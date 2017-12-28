@@ -123,33 +123,22 @@ fi
 if [[ $(command brew list | grep dnsmasq) == "" ]]; then
     echo "Installing dnsmasq"
     brew install dnsmasq
-    echo "Modifing dnsmasq.conf"
-    mkdir -pv $(brew --prefix)/etc/
-    echo "Configuring dnsmasq at $(brew --prefix)/etc/dnsmasq.conf"
-    echo 'address=/.docker/127.0.0.1' > $(brew --prefix)/etc/dnsmasq.conf
-    echo "Copying $(brew --prefix dnsmasq)/homebrew.mxcl.dnsmasq.plist to /Library/LaunchDaemons"
-    sudo cp -v $(brew --prefix dnsmasq)/homebrew.mxcl.dnsmasq.plist /Library/LaunchDaemons
-    echo "Creating directory /etc/resolver"
-    sudo mkdir -v /etc/resolver
-    echo "Creating /etc/resolver/docker file"
-    sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/docker'
-    echo "Luanching damon"
-    sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
 else
     echo "dnsmask already installed"
-    echo "Modifing dnsmasq.conf"
-    mkdir -pv $(brew --prefix)/etc/
-    echo "Configuring dnsmasq at $(brew --prefix)/etc/dnsmasq.conf"
-    echo 'address=/.docker/127.0.0.1' > $(brew --prefix)/etc/dnsmasq.conf
-    echo "Copying $(brew --prefix dnsmasq)/homebrew.mxcl.dnsmasq.plist to /Library/LaunchDaemons"
-    sudo cp -v $(brew --prefix dnsmasq)/homebrew.mxcl.dnsmasq.plist /Library/LaunchDaemons
-    echo "Creating directory /etc/resolver"
-    sudo mkdir -v /etc/resolver
-    echo "Creating /etc/resolver/docker file"
-    sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/docker'
-    echo "Luanching damon"
-    sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
 fi
+
+echo "Modifing dnsmasq.conf"
+mkdir -pv $(brew --prefix)/etc/
+echo "Configuring dnsmasq at $(brew --prefix)/etc/dnsmasq.conf"
+echo 'address=/.docker/127.0.0.1' > $(brew --prefix)/etc/dnsmasq.conf
+echo "Copying $(brew --prefix dnsmasq)/homebrew.mxcl.dnsmasq.plist to /Library/LaunchDaemons"
+sudo cp -v $(brew --prefix dnsmasq)/homebrew.mxcl.dnsmasq.plist /Library/LaunchDaemons
+echo "Creating directory /etc/resolver"
+sudo mkdir -v /etc/resolver
+echo "Creating /etc/resolver/docker file"
+sudo bash -c 'echo "nameserver 127.0.0.1" > /etc/resolver/docker'
+echo "Luanching damon"
+sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
 
 if [[ $(command -v mvn) == "" ]]; then
     echo "Installing Maven"
