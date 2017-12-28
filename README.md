@@ -16,7 +16,7 @@ To execute, open terminal and switch to zsh:
 
 execute curl as follows:
 
-```curl -s https://raw.githubusercontent.com/yohayg/rtp-docker-dev/master/rtp-docker-env-setup.sh | zsh```
+```zsh <(curl -s https://raw.githubusercontent.com/yohayg/rtp-docker-dev/master/rtp-docker-env-setup.sh)```
 
 If you experience issues using curl to get the rtp-docker-env-setup.sh just donwnload it from:
 https://raw.githubusercontent.com/yohayg/rtp-docker-dev/master/rtp-docker-env-setup.sh
