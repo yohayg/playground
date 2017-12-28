@@ -1,13 +1,34 @@
 #!/bin/zsh
 
-if [[ ! -d $1 ]]; then
-    echo "Error: $1 is not a valid directory"
-    echo "Please provide the path to your your git directory"
-    exit 1
-fi
-echo "Using git directory: $1"
-export GIT_PATH=${1%/}
-export RTP_DOCKER_HOME=$GIT_PATH/JenkinsScripts/docker-dev
+function get_abs_path {
+     local PARENT_DIR=$(dirname "$1")
+     cd "$PARENT_DIR"
+     local ABS_PATH="$(pwd)"/"$(basename "$1")"
+     cd - >/dev/null
+
+    if [[ -z $ABS_PATH ]]; then
+      echo "path is empty string"
+      echo "Please provide the path to your your git directory"
+      exit 1
+    fi
+
+    if [[ ! -d $ABS_PATH ]]; then
+        echo "Error: $ABS_PATH is not a valid directory"
+        echo "Please provide the path to your your git directory"
+        exit 1
+    fi
+    echo "Select dir: \"$ABS_PATH\""
+    echo "Using git directory: $ABS_PATH"
+    export GIT_PATH=${ABS_PATH%/}
+    export RTP_DOCKER_HOME=$GIT_PATH/JenkinsScripts/docker-dev
+}
+
+echo "Type the git root directory that you want to pull the code to (This could be changed by re-running the script), followed by [ENTER]:" 
+echo ""
+read tmp_rtp_dir
+
+get_abs_path $tmp_rtp_dir
+
 
 function add_rtp_zsh {
     echo "Creating rtp zsh plugin at /.oh-my-zsh/plugins/rtp/"
