@@ -3,12 +3,12 @@
 A fully automated procedure to setup the RTP development environment.
 
 It will install:
-Homebrew
-Docker
-dnsamsq
-Maven
-oh-my-zsh
-rtp-zsh plugin. Includes rtp aliases and environment variables
+ * Homebrew
+ * Docker
+ * dnsamsq
+ * Maven
+ * oh-my-zsh
+ * rtp-zsh plugin. Includes rtp aliases and environment variables
 
 To execute, open terminal and switch to zsh:
 
