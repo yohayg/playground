@@ -69,12 +69,23 @@ function add_rtp_zsh {
             fi
             return 1
         }
+        
+        function exit_mvn_manifest {
+            echo "Running  mvn org.apache.maven.plugins:maven-war-plugin:2.6:manifest -Dmaven.test.skip=true -f $GIT_PATH/RtpDX/pom.xml"
+            mvn org.apache.maven.plugins:maven-war-plugin:2.6:manifest -Dmaven.test.skip=true -f $GIT_PATH/RtpDX/pom.xml
+            rc=\$?
+            if [[ \$rc -ne 0 ]] ; then
+              echo "could not install \$1"
+              return 0
+            fi
+            return 1
+        }  
      
         function rtp-up {
             cd $RTP_DOCKER_HOME
             bo_set_ver
             dx_set_ver
-            mvn org.apache.maven.plugins:maven-war-plugin:2.6:manifest -Dmaven.test.skip=true -f $GIT_PATH/RtpDX/pom.xml || exit_on_fail RtpDX || exit_on_fail RtpCEP || exit_on_fail RtpBackOffice || docker-compose up -d
+            exit_mvn_manifest || exit_on_fail RtpDX || exit_on_fail RtpCEP || exit_on_fail RtpBackOffice || docker-compose up -d
         }
      
         function rtp-down {
@@ -86,7 +97,7 @@ function add_rtp_zsh {
             cd $RTP_DOCKER_HOME
             bo_set_ver
             dx_set_ver
-            mvn org.apache.maven.plugins:maven-war-plugin:2.6:manifest -Dmaven.test.skip=true -f $GIT_PATH/RtpDX/pom.xml || exit_on_fail RtpDX || exit_on_fail RtpCEP || exit_on_fail RtpBackOffice || docker-compose start
+            exit_mvn_manifest || exit_on_fail RtpDX || exit_on_fail RtpCEP || exit_on_fail RtpBackOffice || docker-compose start
         }
  
         function rtp-stop {
