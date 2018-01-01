@@ -52,6 +52,13 @@ function add_rtp_zsh {
             echo "BO_VER=\$bo_ver"
             echo "BO_VER=\$bo_ver" > ${RTP_DOCKER_HOME}/.env
         }
+        
+        function dx_set_ver {
+            echo "Setting DX version"
+            dx_ver=\$(command grep --max-count=1 '<version>' $GIT_PATH/RtpDXe/pom.xml | awk -F '>' '{ print \$2 }' | awk -F '<' '{ print \$1 }')
+            echo "DX_VER=\$dx_ver"
+            echo "DX_VER=\$dx_ver" >> ${RTP_DOCKER_HOME}/.env
+        }
         function exit_on_fail {
             echo "Running mvn clean install \$2 -Dmaven.test.skip=true -f $GIT_PATH/\$1/pom.xml"
             mvn clean install \$2 -Dmaven.test.skip=true -f $GIT_PATH/\$1/pom.xml
@@ -66,6 +73,7 @@ function add_rtp_zsh {
         function rtp-up {
             cd $RTP_DOCKER_HOME
             bo_set_ver
+            dx_set_ver
             exit_on_fail RtpDX || exit_on_fail RtpCEP || exit_on_fail RtpBackOffice || docker-compose up -d
         }
      
@@ -77,6 +85,7 @@ function add_rtp_zsh {
         function rtp-start {
             cd $RTP_DOCKER_HOME
             bo_set_ver
+            dx_set_ver
             exit_on_fail RtpDX || exit_on_fail RtpCEP || exit_on_fail RtpBackOffice || docker-compose start
         }
  
