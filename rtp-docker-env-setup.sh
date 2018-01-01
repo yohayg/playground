@@ -74,7 +74,7 @@ function add_rtp_zsh {
             cd $RTP_DOCKER_HOME
             bo_set_ver
             dx_set_ver
-            exit_on_fail RtpDX || exit_on_fail RtpCEP || exit_on_fail RtpBackOffice || docker-compose up -d
+            mvn org.apache.maven.plugins:maven-war-plugin:2.6:manifest -Dmaven.test.skip=true -f $GIT_PATH/RtpDX/pom.xml || exit_on_fail RtpDX || exit_on_fail RtpCEP || exit_on_fail RtpBackOffice || docker-compose up -d
         }
      
         function rtp-down {
@@ -86,7 +86,7 @@ function add_rtp_zsh {
             cd $RTP_DOCKER_HOME
             bo_set_ver
             dx_set_ver
-            exit_on_fail RtpDX || exit_on_fail RtpCEP || exit_on_fail RtpBackOffice || docker-compose start
+            mvn org.apache.maven.plugins:maven-war-plugin:2.6:manifest -Dmaven.test.skip=true -f $GIT_PATH/RtpDX/pom.xml || exit_on_fail RtpDX || exit_on_fail RtpCEP || exit_on_fail RtpBackOffice || docker-compose start
         }
  
         function rtp-stop {
@@ -104,6 +104,12 @@ function add_rtp_zsh {
             cd $RTP_DOCKER_HOME
             docker-compose stop cep.docker
             exit_on_fail RtpCore -o || exit_on_fail RtpCommon -o || exit_on_fail RtpTRWCommons -o || exit_on_fail RtpCEP -o || docker-compose start cep.docker     
+        }
+        
+        function dx-restart {
+            cd $RTP_DOCKER_HOME
+            docker-compose stop dx.docker
+            exit_on_fail RtpCore -o || exit_on_fail RtpCommon -o || exit_on_fail RtpTRWCommons -o || exit_on_fail RtpCEP -o || docker-compose start dx.docker     
         }
 EOF
 
