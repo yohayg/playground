@@ -55,7 +55,7 @@ function add_rtp_zsh {
         
         function dx_set_ver {
             echo "Setting DX version"
-            dx_ver=\$(command grep --max-count=1 '<version>' $GIT_PATH/RtpDXe/pom.xml | awk -F '>' '{ print \$2 }' | awk -F '<' '{ print \$1 }')
+            dx_ver=\$(command grep --max-count=1 '<version>' $GIT_PATH/RtpDX/pom.xml | awk -F '>' '{ print \$2 }' | awk -F '<' '{ print \$1 }')
             echo "DX_VER=\$dx_ver"
             echo "DX_VER=\$dx_ver" >> ${RTP_DOCKER_HOME}/.env
         }
