@@ -119,8 +119,8 @@ function add_rtp_zsh {
         
         function dx-restart {
             cd $RTP_DOCKER_HOME
-            docker-compose stop dx.docker
-            exit_on_fail RtpCore -o || exit_on_fail RtpCommon -o || exit_on_fail RtpTRWCommons -o || exit_on_fail RtpCEP -o || docker-compose start dx.docker     
+            docker-compose stop data-exchange.docker
+            exit_on_fail RtpCore -o || exit_on_fail RtpCommon -o || exit_on_fail RtpTRWCommons -o || exit_on_fail RtpCEP -o || docker-compose start data-exchange.docker     
         }
 EOF
 
