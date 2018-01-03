@@ -157,6 +157,7 @@ echo "Modifing dnsmasq.conf"
 mkdir -pv $(brew --prefix)/etc/
 echo "Configuring dnsmasq at $(brew --prefix)/etc/dnsmasq.conf"
 echo 'address=/.docker/127.0.0.1' > $(brew --prefix)/etc/dnsmasq.conf
+echo -e 'address=/.docker/127.0.0.1 \nserver=8.8.8.8 \nserver=8.8.4.4 \nstrict-order' > $(brew --prefix)/etc/dnsmasq.conf
 echo "Copying $(brew --prefix dnsmasq)/homebrew.mxcl.dnsmasq.plist to /Library/LaunchDaemons"
 sudo cp -v $(brew --prefix dnsmasq)/homebrew.mxcl.dnsmasq.plist /Library/LaunchDaemons
 echo "Creating directory /etc/resolver"
