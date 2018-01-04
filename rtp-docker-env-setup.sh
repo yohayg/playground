@@ -156,6 +156,11 @@ else
     sudo rm /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
     sudo rm /etc/resolver/docker
     
+    echo "Restarting wifi"
+    sudo ifconfig en0 down
+    sleep 5
+    sudo ifconfig en0 up
+    
 fi
 
 if [[ $(command -v mvn) == "" ]]; then
