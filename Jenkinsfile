@@ -18,14 +18,16 @@ node {
 
        stage('Test'){
          echo 'Testing...'
-           sh('run_test.sh')
+         sh "#!/bin/bash \n" + "echo \"Hello from \$SHELL\""
+         sh "pwd"
+         sh "ls -la"
+         echo '${workspace}'
+         sh('./${workspace}/run_test.sh')
 
        }
 
        stage('Build Docker'){
-           sh "#!/bin/bash \n" + "echo \"Hello from \$SHELL\""
-            sh "pwd"
-            sh "ls -la"
+           
             echo 'build docker'
        }
 
