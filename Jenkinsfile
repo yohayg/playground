@@ -18,7 +18,7 @@ node {
 
        stage('Test'){
          echo 'Testing...'
-           run_test.sh
+           sh(run_test.sh)
 
        }
 
