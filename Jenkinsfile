@@ -18,6 +18,7 @@ node {
 
        stage('Test'){
          echo 'Testing...'
+           run_test.sh
 
        }
 
