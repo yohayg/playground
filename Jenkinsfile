@@ -22,7 +22,7 @@ node {
          sh "pwd"
          sh "ls -la"
          echo '${workspace}'
-         sh('./${workspace}/run_test.sh')
+         sh('./run_test.sh')
 
        }
 
