@@ -1,4 +1,4 @@
 #!/bin/bash
 
 echo 'hello from test'
-gcloud app deploy
+gcloud app deploy --quiet --verbosity
