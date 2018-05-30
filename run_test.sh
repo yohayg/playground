@@ -1,4 +1,4 @@
 #!/bin/bash
 
 echo 'hello from test'
-gcloud projects list
+gcloud app deploy
